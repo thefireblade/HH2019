@@ -179,7 +179,15 @@ def cleanList(menuItems):
 # Valid fields are: calories, carbs, protein, fat, saturated fat, sugar, name, price
 def removeAllNone(menuItems, field):
     for menuItem in menuItems:
-        if type(menuItem["rounded_nutrition_info"][nutritionFields.get(field)]) is None:
+        if menuItem["rounded_nutrition_info"]["calories"] is None:
+            print(menuItem)
+            menuItems.remove(menuItem)
+            continue
+        if type(menuItem["rounded_nutrition_info"][nutritionFields.get(field)]) is not float:
+            print(menuItem)
+            menuItems.remove(menuItem)
+            continue
+        if isinstance(menuItem["rounded_nutrition_info"][nutritionFields.get(field)], type(None)):
             print(menuItem)
             menuItems.remove(menuItem)
 
