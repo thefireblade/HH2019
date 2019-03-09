@@ -55,6 +55,7 @@ def getAllMenuItems():
                     if menu_items['food'] is None:
                         continue
                     food_item = menu_items['food']
+                    food_item['icons'] = None
                     food_item['menu_type'] = menu_type
                     food_item['meal_type']  = meal_type
                     food_item['location_name'] = location_name
