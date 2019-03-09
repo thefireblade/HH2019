@@ -235,8 +235,9 @@ def sort(menuItems, field):
         return newlist
     elif field == "meal_type":
         #removeAllForElse(menuItems, nutritionFields.get(field))
-        newlist = sorted(menuItems, key=lambda k: k["meal_type"])
-        return newlist
+        #newlist = sorted(menuItems, key=lambda k: k["meal_type"])
+        #return newlist
+        return menuItems
     elif field == "price":
         removeAllForElse(menuItems, nutritionFields.get(field))
         newlist = sorted(menuItems, key=lambda k: k["price"])
