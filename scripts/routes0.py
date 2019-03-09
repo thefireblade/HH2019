@@ -139,19 +139,19 @@ def updateMongoWithAllMenus():
 def getRandomBreakfastItems():
     url = "http://34.73.231.100:5000/api/search/mealtype/Breakfast"
     items = requests.get(url).json()
-    index =random.randint(0,len(items))
+    index =random.randint(1,len(items)) - 1
     return items[index]
 
 def getRandomLunchItems():
     url = "http://34.73.231.100:5000/api/search/mealtype/Lunch"
     items = requests.get(url).json()
-    index =random.randint(0,len(items))
+    index =random.randint(1,len(items)) - 1
     return items[index]
 
 def getRandomDinnerItems():
     url = "http://34.73.231.100:5000/api/search/mealtype/Dinner"
     items = requests.get(url).json()
-    index =random.randint(0,len(items))
+    index =random.randint(1,len(items)) - 1
     return items[index]
 
 @app.route('/api/menu/generateRandom/<string:field>', methods=['GET'])
