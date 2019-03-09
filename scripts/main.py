@@ -21,7 +21,7 @@ reset = True
 
 print("connected to our mysql server successfully")
 app = flask.Flask(__name__)
-app.config["DEBUG"] = True
+app.config["DEBUG"] = False
 app.register_blueprint(route0)
 app.register_blueprint(route1)
 #
