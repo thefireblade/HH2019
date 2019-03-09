@@ -331,7 +331,7 @@ def sortByGreaterThan(menuItems, field, amount):
     for i in rawList:
         if i[nutritionFields.get("nutrition")][nutritionFields.get(field)] >= amount:
             updatedList.append(i)
-    return jsonify(updatedList)
+    return updatedList
 
 @app.route('/api/sort/greaterthan/calories/<int:amount>', methods=['GET'])
 def getCaloriesGreaterThan(amount, fields="calories"):
