@@ -17,8 +17,6 @@ mydb = mysql.connector.connect(
 mongoClient = pymongo.MongoClient("mongodb://localhost:27017/")
 mydb = mongoClient['hh2019']
 
-reset = True
-
 print("connected to our mysql server successfully")
 app = flask.Flask(__name__)
 app.config["DEBUG"] = False

@@ -95,7 +95,6 @@ Takes  in  an array with a price field
 '''
 #test = [ {'price':3.00}, {'price':1.00}, {'price':1.5}, {'price':5.00}]
 def sortByPrice(arr):
-    print(arr)
     zeroNullPrices(arr)
     newlist = sorted(arr, key=lambda k: k["price"])
     return newlist
