@@ -1,7 +1,7 @@
 import flask
 import requests
 import json
-from flask import request, jsonify, Blueprint
+from flask import request, jsonify, Blueprint, render_template
 from routes0 import getTempMenu, updateMenu
 
 app = Blueprint('route1',__name__, template_folder='templates')
@@ -145,7 +145,7 @@ def sortByLessThan(menuItems, field, amount):
 
 @app.route('/api', methods=['GET'])
 def reference():
-    return app.send_static_file('Reference.html')
+    return render_template('Reference.html')
 
 @app.route('/api/sort/all/calories', methods=['GET'])
 def getCalories(field="calories"):
