@@ -180,16 +180,16 @@ def cleanList(menuItems):
 def removeAllNone(menuItems, field):
     for menuItem in menuItems:
         if menuItem["rounded_nutrition_info"][field] is None:
+            menuItem["rounded_nutrition_info"][field] = 0
             print(menuItem)
-            menuItems.remove(menuItem)
-            continue
+        continue
         if type(menuItem["rounded_nutrition_info"][field]) is not float:
+            menuItem["rounded_nutrition_info"][field] = 0
             print(menuItem)
-            menuItems.remove(menuItem)
             continue
         if isinstance(menuItem["rounded_nutrition_info"][field], type(None)):
+            menuItem["rounded_nutrition_info"][field] = 0
             print(menuItem)
-            menuItems.remove(menuItem)
 
 def sort(menuItems, field):
     #menuItems = cleanList(menuItems)
