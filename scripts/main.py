@@ -36,4 +36,4 @@ app.register_blueprint(route1)
 # def returnSortedByPrice():
 #     return jsonify(methods0.sortByPrice(all_menu_items))
 
-app.run()
+app.run(host='0.0.0.0')
