@@ -152,4 +152,6 @@ def sortByLessThan(menuItems, field, amount):
     print(json.dumps(updatedList, indent=4, sort_keys=False))
 
 
-sortByLessThan(menuItems, "carbs", 20)
+# sortByLessThan(menuItems, "carbs", 20)
+
+
