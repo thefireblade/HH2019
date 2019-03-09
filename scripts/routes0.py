@@ -87,7 +87,7 @@ def updateMenu(menuItems):
 #remove all null prices
 def zeroNullPrices(arr):
     for item in arr:
-        if item['price'] is None
+        if item['price'] is None:
             item['price'] = 0
 '''
 Takes  in  an array with a price field
