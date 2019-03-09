@@ -99,7 +99,8 @@ menuItems = [
             "location_name": "eastdining",
             "menu_type": "kosher",
             "meal_type":
-                ["Breakfast", "Lunch", "Dinner"]
+                ["Breakfast", "Lunch", "Dinner"],
+            "price": 5.33
         },
         {
             "name": "bread",
@@ -126,12 +127,16 @@ menuItems = [
             "location_name": "westdining",
             "menu_type": "kosher",
             "meal_type":
-                ["Breakfast", "Lunch", "Dinner"]
+                ["Breakfast", "Lunch", "Dinner"],
+            "price": 0.0
         }
 ]
 
 def cleanList(menuItems):
     for menuItem in menuItems:
+        if menuItem["price"] == 0.0:
+            menuItems.remove(menuItem)
+            continue
         if menuItem["rounded_nutrition_info"]["calories"] == "null":
             menuItem["rounded_nutrition_info"]["calories"] = 0.0
         if menuItem["rounded_nutrition_info"]["g_carbs"] == "null":
@@ -348,5 +353,16 @@ def searchByLocation(menuItems, field):
     for i in rawList:
         if i["location_name"] == field:
             updatedList.append(i)
+    print(json.dumps(updatedList, indent=4, sort_keys=False))
+    return updatedList
+
+@app.route('/api/search/mealtype/', methods=['GET'])
+def searchByType(menuItems, field):
+    rawList = sort(menuItems, "meal_type")
+    updatedList = []
+    for i in rawList:
+        for j in i["meal_type"]:
+            if j == field:
+                updatedList.append(i)
     print(json.dumps(updatedList, indent=4, sort_keys=False))
     return updatedList
