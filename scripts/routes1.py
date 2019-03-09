@@ -329,7 +329,7 @@ def sortByGreaterThan(menuItems, field, amount):
     rawList = sort(menuItems, field)
     updatedList = []
     for i in rawList:
-        if i[nutritionFields.get("nutrition")][nutritionFields.get(field)] >= amount:
+        if i[nutritionFields.get("nutrition")][nutritionFields.get(field)] > amount:
             updatedList.append(i)
     return updatedList
 
@@ -368,7 +368,7 @@ def getPriceGreaterThan(amount, fields="price"):
     menuItems = getTempMenu()
     return jsonify(updateMenu(sortByGreaterThan(menuItems, fields, amount)))
 
-@app.route('/api/search/name/', methods=['GET'])
+@app.route('/api/search/name/<string:name>', methods=['GET'])
 def searchByName(name):
     menuItems = getTempMenu()
     menuItems = sort(menuItems, nutritionFields.get("name"))
@@ -378,7 +378,7 @@ def searchByName(name):
             list.append(i)
     return jsonify(updateMenu(list))
 
-@app.route('/api/search/location/', methods=['GET'])
+@app.route('/api/search/location/<string:field>', methods=['GET'])
 def searchByLocation(field):
     menuItems = getTempMenu()
     rawList = sort(menuItems, "location_name")
@@ -389,7 +389,7 @@ def searchByLocation(field):
     #print(json.dumps(updatedList, indent=4, sort_keys=False))
     return jsonify(updateMenu(updatedList))
 
-@app.route('/api/search/mealtype/', methods=['GET'])
+@app.route('/api/search/mealtype/<string:field>', methods=['GET'])
 def searchByType(field):
     menuItems = getTempMenu()
     rawList = sort(menuItems, "meal_type")
