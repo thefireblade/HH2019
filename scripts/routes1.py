@@ -63,12 +63,60 @@ def api_id():
 # data = r.json()
 
 nutritionFields = {
+    "nutrition": "rounded_nutrition_info",
     "calories": "calories",
     "carbs": "g_carbs",
-
+    "protein": "g_protein",
+    "fat": "g_fat",
+    "saturated fat": "g_saturated_fat",
+    "sugar": "g_sugar",
+    "name": "name",
+    "price": "price"
 }
-
-# Valid fields are: calories, carbs, protein, fat, saturated fat, sugar, name
+menuItems = [
+        {
+            "name": "pizza",
+            "rounded_nutrition_info": {
+            "calories": 230.0,
+            "g_carbs": 41.0,
+                            "g_fiber": 6.0,
+                            "mg_vitamin_d": 0.0,
+                            "mg_potassium": "null",
+                            "mg_calcium": 42.3,
+                            "iu_vitamin_a": "null",
+                            "g_added_sugar": "null",
+                            "mg_cholesterol": 0.0,
+                            "mg_iron": 2.6,
+                            "mg_sodium": 15.0,
+                            "mg_vitamin_c": 0.0,
+                            "g_trans_fat": "null",
+                            "re_vitamin_a": "null",
+                            "g_protein": 8.0,
+                            "g_sugar": 1.0,
+                            "g_saturated_fat": 0.5,
+                            "g_fat": 4.0}, "location_name": "eastdining", "menu_type": "kosher",
+         "meal_type": ["Breakfast", "Lunch", "Dinner"]},
+        {"name": "bread", "rounded_nutrition_info": {
+                            "calories": 130.0,
+                            "g_carbs": 14.0,
+                            "g_fiber": 1.0,
+                            "mg_vitamin_d": "null",
+                            "mg_potassium": "null",
+                            "mg_calcium": 26.2,
+                            "iu_vitamin_a": "null",
+                            "g_added_sugar": "null",
+                            "mg_cholesterol": 35.0,
+                            "mg_iron": 1.0,
+                            "mg_sodium": 550.0,
+                            "mg_vitamin_c": 2.5,
+                            "g_trans_fat": "null",
+                            "re_vitamin_a": "null",
+                            "g_protein": 11.0,
+                            "g_sugar": "null",
+                            "g_saturated_fat": 0.5,
+                            "g_fat": 3.5}, "location_name": "westdining", "menu_type": "kosher",
+         "meal_type": ["Breakfast", "Lunch", "Dinner"]}]
+# Valid fields are: calories, carbs, protein, fat, saturated fat, sugar, name, price
 def sort(menuItems, field):
     if field == "calories":
         newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["calories"])
@@ -92,7 +140,16 @@ def sort(menuItems, field):
         newlist = sorted(menuItems, key=lambda k: k["name"])
         return newlist
     elif field == "price":
+        newlist = sorted(menuItems, key=lambda k: k["price"])
+        return newlist
 
 def sortByLessThan(menuItems, field, amount):
     rawList = sort(menuItems, field)
     updatedList = []
+    for i in rawList:
+        if i[nutritionFields.get("nutrition")][nutritionFields.get(field)] <= amount:
+            updatedList.append(i)
+    print(json.dumps(updatedList, indent=4, sort_keys=False))
+
+
+sortByLessThan(menuItems, "carbs", 20)
