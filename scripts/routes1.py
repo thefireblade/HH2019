@@ -133,9 +133,14 @@ def sort(menuItems, field):
 def sortByLessThan(menuItems, field, amount):
     rawList = sort(menuItems, field)
     updatedList = []
-    for i in rawList:
-        if i[nutritionFields.get("nutrition")][nutritionFields.get(field)] <= amount:
-            updatedList.append(i)
+    if field == "price":
+        for i in rawList:
+            if i[nutritionFields.get(field)] * 1.0 > amount * 1.0:
+                updatedList.append(i)
+    else:
+        for i in rawList:
+            if i[nutritionFields.get("nutrition")][nutritionFields.get(field)] * 1.0 <= amount * 1.0:
+                updatedList.append(i)
     return updatedList
 
 @app.route('/api/sort/all/calories', methods=['GET'])
@@ -216,9 +221,14 @@ def getPriceLessThanEqualTo(amount, field="price"):
 def sortByGreaterThan(menuItems, field, amount):
     rawList = sort(menuItems, field)
     updatedList = []
-    for i in rawList:
-        if i[nutritionFields.get("nutrition")][nutritionFields.get(field)] > amount:
-            updatedList.append(i)
+    if field == "price":
+        for i in rawList:
+            if i[nutritionFields.get(field)] * 1.0 > amount * 1.0:
+                updatedList.append(i)
+    else:
+        for i in rawList:
+            if i[nutritionFields.get("nutrition")][nutritionFields.get(field)] * 1.0 > amount * 1.0:
+                updatedList.append(i)
     return updatedList
 
 @app.route('/api/sort/greaterthan/calories/<float:amount>', methods=['GET'])
