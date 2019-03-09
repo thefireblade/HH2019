@@ -64,8 +64,7 @@ def api_id():
 
 nutritionFields = {
     "calories": "calories",
-    "carbs": "g_carbs",
-
+    "carbs": "g_carbs"
 }
 
 # Valid fields are: calories, carbs, protein, fat, saturated fat, sugar, name
@@ -92,6 +91,8 @@ def sort(menuItems, field):
         newlist = sorted(menuItems, key=lambda k: k["name"])
         return newlist
     elif field == "price":
+        newlist = sorted(menuItems, key=lambda k: k["price"])
+        return newlist
 
 def sortByLessThan(menuItems, field, amount):
     rawList = sort(menuItems, field)
