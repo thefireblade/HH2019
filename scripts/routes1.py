@@ -274,7 +274,7 @@ def searchByLocation(field):
     rawList = sort(menuItems, "location_name")
     updatedList = []
     for i in rawList:
-        if i["location_name"].lower() == field.lower():
+        if field.lower() in i["location_name"].lower():
             updatedList.append(i)
     #print(json.dumps(updatedList, indent=4, sort_keys=False))
     return jsonify(updateMenu(updatedList))
