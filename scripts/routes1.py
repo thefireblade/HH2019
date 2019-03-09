@@ -2,7 +2,7 @@ import flask
 import requests
 import json
 from flask import request, jsonify, Blueprint
-from routes0 import getLatestMenu
+from routes0 import getTempMenu, updateMenu
 
 app = Blueprint('route1',__name__, template_folder='templates')
 
@@ -181,15 +181,23 @@ def removeAllNone(menuItems, field):
     for menuItem in menuItems:
         if menuItem["rounded_nutrition_info"][field] is None:
             menuItem["rounded_nutrition_info"][field] = 0
-            print(menuItem)
-        continue
+            continue
         if type(menuItem["rounded_nutrition_info"][field]) is not float:
             menuItem["rounded_nutrition_info"][field] = 0
-            print(menuItem)
             continue
         if isinstance(menuItem["rounded_nutrition_info"][field], type(None)):
             menuItem["rounded_nutrition_info"][field] = 0
-            print(menuItem)
+
+def removeAllForElse(menuItems, field):
+    for menuItem in menuItems:
+        if menuItem[field] is None:
+            menuItem[field] = 0
+            continue
+        if type(menuItem[field]) is not float:
+            menuItem[field] = 0
+            continue
+        if isinstance(menuItem[field], type(None)):
+            menuItem[field] = 0
 
 def sort(menuItems, field):
     #menuItems = cleanList(menuItems)
@@ -218,19 +226,19 @@ def sort(menuItems, field):
         newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["g_sugar"])
         return newlist
     elif field == "name":
-        removeAllNone(menuItems, nutritionFields.get(field))
+        removeAllForElse(menuItems, nutritionFields.get(field))
         newlist = sorted(menuItems, key=lambda k: k["name"])
         return newlist
     elif field == "location_name":
-        removeAllNone(menuItems, nutritionFields.get(field))
+        removeAllForElse(menuItems, nutritionFields.get(field))
         newlist = sorted(menuItems, key=lambda k: k["location_name"])
         return newlist
     elif field == "meal_type":
-        removeAllNone(menuItems, nutritionFields.get(field))
+        removeAllForElse(menuItems, nutritionFields.get(field))
         newlist = sorted(menuItems, key=lambda k: k["meal_type"])
         return newlist
     elif field == "price":
-        removeAllNone(menuItems, nutritionFields.get(field))
+        removeAllForElse(menuItems, nutritionFields.get(field))
         newlist = sorted(menuItems, key=lambda k: k["price"])
         return newlist
 
@@ -240,98 +248,82 @@ def sortByLessThan(menuItems, field, amount):
     for i in rawList:
         if i[nutritionFields.get("nutrition")][nutritionFields.get(field)] <= amount:
             updatedList.append(i)
-    print(json.dumps(updatedList, indent=4, sort_keys=False))
     return updatedList
 
 @app.route('/api/sort/all/calories', methods=['GET'])
 def getCalories(field="calories"):
-    menuItems = getLatestMenu()
-    list = sort(menuItems, field)
-    return jsonify(list)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sort(menuItems, field)))
 
 @app.route('/api/sort/all/carbs', methods=['GET'])
 def getCarbs(field="carbs"):
-    menuItems = getLatestMenu()
-    list = sort(menuItems, field)
-    return jsonify(list)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sort(menuItems, field)))
 
 @app.route('/api/sort/all/protein', methods=['GET'])
 def getProtein(field="protein"):
-    menuItems = getLatestMenu()
-    list = sort(menuItems, field)
-    return jsonify(list)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sort(menuItems, field)))
 
 @app.route('/api/sort/all/saturatedfat', methods=['GET'])
 def getSaturatedFat(field="saturated fat"):
-    menuItems = getLatestMenu()
-    list = sort(menuItems, field)
-    return jsonify(list)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sort(menuItems, field)))
 
 @app.route('/api/sort/all/fat', methods=['GET'])
 def getFat(field="fat"):
-    menuItems = getLatestMenu()
-    list = sort(menuItems, field)
-    return jsonify(list)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sort(menuItems, field)))
 
 @app.route('/api/sort/all/sugar', methods=['GET'])
 def getSugar(field="sugar"):
-    menuItems = getLatestMenu()
-    list = sort(menuItems, field)
-    return jsonify(list)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sort(menuItems, field)))
 
 @app.route('/api/sort/all/name', methods=['GET'])
 def getName(field="name"):
-    menuItems = getLatestMenu()
-    list = sort(menuItems, field)
-    return jsonify(list)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sort(menuItems, field)))
 
 @app.route('/api/sort/all/price', methods=['GET'])
 def getPrice(field="price"):
-    menuItems = getLatestMenu()
-    list = sort(menuItems, field)
-    return jsonify(list)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sort(menuItems, field)))
 
 @app.route('/api/sort/lessthanequalto/calories/<int:amount>', methods=['GET'])
 def getCaloriesLessThanEqualTo(amount, field="calories"):
-    menuItems = getLatestMenu()
-    updated = sortByLessThan(menuItems, field, amount)
-    return jsonify(updated)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sortByLessThan(menuItems, field, amount)))
 
 @app.route('/api/sort/lessthanequalto/carbs/<int:amount>', methods=['GET'])
 def getCarbsLessThanEqualTo(amount, field="carbs"):
-    menuItems = getLatestMenu()
-    updated = sortByLessThan(menuItems, field, amount)
-    return jsonify(updated)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sortByLessThan(menuItems, field, amount)))
 
 @app.route('/api/sort/lessthanequalto/protein/<int:amount>', methods=['GET'])
 def getProteinLessThanEqualTo(amount, field="protein"):
-    menuItems = getLatestMenu()
-    updated = sortByLessThan(menuItems, field, amount)
-    return jsonify(updated)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sortByLessThan(menuItems, field, amount)))
 
 @app.route('/api/sort/lessthanequalto/saturatedfat/<int:amount>', methods=['GET'])
 def getSaturatedFatLessThanEqualTo(amount, field="saturated fat"):
-    menuItems = getLatestMenu()
-    updated = sortByLessThan(menuItems, field, amount)
-    return jsonify(updated)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sortByLessThan(menuItems, field, amount)))
 
 @app.route('/api/sort/lessthanequalto/fat/<int:amount>', methods=['GET'])
 def getFatLessThanEqualTo(amount, field="fat"):
-    menuItems = getLatestMenu()
-    updated = sortByLessThan(menuItems, field, amount)
-    return jsonify(updated)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sortByLessThan(menuItems, field, amount)))
 
 @app.route('/api/sort/lessthanequalto/sugar/<int:amount>', methods=['GET'])
 def getSugarLessThanEqualTo(amount, field="sugar"):
-    menuItems = getLatestMenu()
-    updated = sortByLessThan(menuItems, field, amount)
-    return jsonify(updated)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sortByLessThan(menuItems, field, amount)))
 
 @app.route('/api/sort/lessthanequalto/price/<int:amount>', methods=['GET'])
 def getPriceLessThanEqualTo(amount, field="price"):
-    menuItems = getLatestMenu()
-    updated = sortByLessThan(menuItems, field, amount)
-    return jsonify(updated)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sortByLessThan(menuItems, field, amount)))
 
 def sortByGreaterThan(menuItems, field, amount):
     rawList = sort(menuItems, field)
@@ -343,70 +335,63 @@ def sortByGreaterThan(menuItems, field, amount):
 
 @app.route('/api/sort/greaterthan/calories/<int:amount>', methods=['GET'])
 def getCaloriesGreaterThan(amount, fields="calories"):
-    menuItems = getLatestMenu()
-    updatedList = sortByGreaterThan(menuItems, fields, amount)
-    return jsonify(updatedList)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sortByGreaterThan(menuItems, fields, amount)))
 
 @app.route('/api/sort/greaterthan/carbs/<int:amount>', methods=['GET'])
 def getCarbsGreaterThan(amount, fields="carbs"):
-    menuItems = getLatestMenu()
-    updatedList = sortByGreaterThan(menuItems, fields, amount)
-    return jsonify(updatedList)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sortByGreaterThan(menuItems, fields, amount)))
 
 @app.route('/api/sort/greaterthan/protein/<int:amount>', methods=['GET'])
 def getProteinGreaterThan(amount, fields="protein"):
-    menuItems = getLatestMenu()
-    updatedList = sortByGreaterThan(menuItems, fields, amount)
-    return jsonify(updatedList)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sortByGreaterThan(menuItems, fields, amount)))
 
 @app.route('/api/sort/greaterthan/saturatedfat/<int:amount>', methods=['GET'])
 def getSaturatedFatGreaterThan(amount, fields="saturated fat"):
-    menuItems = getLatestMenu()
-    updatedList = sortByGreaterThan(menuItems, fields, amount)
-    return jsonify(updatedList)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sortByGreaterThan(menuItems, fields, amount)))
 
 @app.route('/api/sort/greaterthan/fat/<int:amount>', methods=['GET'])
 def getFatGreaterThan(amount, fields="fat"):
-    menuItems = getLatestMenu()
-    updatedList = sortByGreaterThan(menuItems, fields, amount)
-    return jsonify(updatedList)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sortByGreaterThan(menuItems, fields, amount)))
 
 @app.route('/api/sort/greaterthan/sugar/<int:amount>', methods=['GET'])
 def getSugarGreaterThan(amount, fields="sugar"):
-    menuItems = getLatestMenu()
-    updatedList = sortByGreaterThan(menuItems, fields, amount)
-    return jsonify(updatedList)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sortByGreaterThan(menuItems, fields, amount)))
 
 @app.route('/api/sort/greaterthan/price/<int:amount>', methods=['GET'])
 def getPriceGreaterThan(amount, fields="price"):
-    menuItems = getLatestMenu()
-    updatedList = sortByGreaterThan(menuItems, fields, amount)
-    return jsonify(updatedList)
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sortByGreaterThan(menuItems, fields, amount)))
 
 @app.route('/api/search/name/', methods=['GET'])
 def searchByName(name):
-    menuItems = getLatestMenu()
+    menuItems = getTempMenu()
     menuItems = sort(menuItems, nutritionFields.get("name"))
     list = []
     for i in menuItems:
         if i["name"] == name:
             list.append(i)
-    return jsonify(list)
+    return jsonify(updateMenu(list))
 
 @app.route('/api/search/location/', methods=['GET'])
 def searchByLocation(field):
-    menuItems = getLatestMenu()
+    menuItems = getTempMenu()
     rawList = sort(menuItems, "location_name")
     updatedList = []
     for i in rawList:
         if i["location_name"] == field:
             updatedList.append(i)
     #print(json.dumps(updatedList, indent=4, sort_keys=False))
-    return jsonify(updatedList)
+    return jsonify(updateMenu(updatedList))
 
 @app.route('/api/search/mealtype/', methods=['GET'])
 def searchByType(field):
-    menuItems = getLatestMenu()
+    menuItems = getTempMenu()
     rawList = sort(menuItems, "meal_type")
     updatedList = []
     for i in rawList:
@@ -414,4 +399,4 @@ def searchByType(field):
             if j == field:
                 updatedList.append(i)
     #print(json.dumps(updatedList, indent=4, sort_keys=False))
-    return jsonify(updatedList)
+    return jsonify(updateMenu(updatedList))
