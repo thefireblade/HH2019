@@ -181,6 +181,7 @@ def sort(menuItems, field):
     menuItems = cleanList(menuItems)
     if field == "calories":
         newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["calories"])
+        print(newlist)
         return newlist
     elif field == "carbs":
         newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["g_carbs"])
@@ -221,7 +222,7 @@ def sortByLessThan(menuItems, field, amount):
 
 @app.route('/api/sort/all/calories', methods=['GET'])
 def getCalories(menuItems = getLatestMenu(), field="calories"):
-
+    menuItems = getLatestMenu()
     list = sort(menuItems, field)
     return list
 
