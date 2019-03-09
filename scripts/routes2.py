@@ -14,41 +14,41 @@ def sortByGreaterThan(menuItems, field, amount):
 
 def cleanList(menuItems):
     for menuItem in menuItems:
-        if menuItem["rounded_nutrition_info"]["calories"] == "null":
+        if menuItem["rounded_nutrition_info"]["calories"] is None:
             menuItem["rounded_nutrition_info"]["calories"] = 0
-        if menuItem["rounded_nutrition_info"]["g_carbs"] == "null":
+        if menuItem["rounded_nutrition_info"]["g_carbs"] is None:
             menuItem["rounded_nutrition_info"]["g_carbs"] = 0
-        if menuItem["rounded_nutrition_info"]["g_fiber"] == "null":
+        if menuItem["rounded_nutrition_info"]["g_fiber"] is None:
             menuItem["rounded_nutrition_info"]["g_fiber"] = 0
-        if menuItem["rounded_nutrition_info"]["mg_vitamin"] == "null":
+        if menuItem["rounded_nutrition_info"]["mg_vitamin"] is None:
             menuItem["rounded_nutrition_info"]["mg_vitamin"] = 0
-        if menuItem["rounded_nutrition_info"]["mg_potassium"] == "null":
+        if menuItem["rounded_nutrition_info"]["mg_potassium"] is None:
             menuItem["rounded_nutrition_info"]["mg_potassium"] = 0
-        if menuItem["rounded_nutrition_info"]["mg_calcium"] == "null":
+        if menuItem["rounded_nutrition_info"]["mg_calcium"] is None:
             menuItem["rounded_nutrition_info"]["mg_calcium"] = 0
-        if menuItem["rounded_nutrition_info"]["iu_vitamin_a"] == "null":
+        if menuItem["rounded_nutrition_info"]["iu_vitamin_a"] is None:
             menuItem["rounded_nutrition_info"]["iu_vitamin_a"] = 0
-        if menuItem["rounded_nutrition_info"]["g_added_sugar"] == "null":
+        if menuItem["rounded_nutrition_info"]["g_added_sugar"] is None:
             menuItem["rounded_nutrition_info"]["g_added_sugar"] = 0
-        if menuItem["rounded_nutrition_info"]["mg_cholestrol"] == "null":
+        if menuItem["rounded_nutrition_info"]["mg_cholestrol"] is None:
             menuItem["rounded_nutrition_info"]["mg_cholestrol"] = 0
-        if menuItem["rounded_nutrition_info"]["mg_iron"] == "null":
+        if menuItem["rounded_nutrition_info"]["mg_iron"] is None:
             menuItem["rounded_nutrition_info"]["mg_iron"] = 0
-        if menuItem["rounded_nutrition_info"]["mg_sodium"] == "null":
+        if menuItem["rounded_nutrition_info"]["mg_sodium"] is None:
             menuItem["rounded_nutrition_info"]["mg_sodium"] = 0
-        if menuItem["rounded_nutrition_info"]["mg_vitamin_c"] == "null":
+        if menuItem["rounded_nutrition_info"]["mg_vitamin_c"] is None:
             menuItem["rounded_nutrition_info"]["mg_vitamin_c"] = 0
-        if menuItem["rounded_nutrition_info"]["g_trans_fat"] == "null":
+        if menuItem["rounded_nutrition_info"]["g_trans_fat"] is None:
             menuItem["rounded_nutrition_info"]["g_trans_fat"] = 0
-        if menuItem["rounded_nutrition_info"]["re_vitamin_a"] == "null":
+        if menuItem["rounded_nutrition_info"]["re_vitamin_a"] is None:
             menuItem["rounded_nutrition_info"]["re_vitamin_a"] = 0
-        if menuItem["rounded_nutrition_info"]["g_protein"] == "null":
+        if menuItem["rounded_nutrition_info"]["g_protein"] is None:
             menuItem["rounded_nutrition_info"]["g_protein"] = 0
-        if menuItem["rounded_nutrition_info"]["g_sugar"] == "null":
+        if menuItem["rounded_nutrition_info"]["g_sugar"] is None:
             menuItem["rounded_nutrition_info"]["g_sugar"] = 0
-        if menuItem["rounded_nutrition_info"]["g_saturated"] == "null":
+        if menuItem["rounded_nutrition_info"]["g_saturated"] is None:
             menuItem["rounded_nutrition_info"]["g_saturated"] = 0
-        if menuItem["rounded_nutrition_info"]["g_fat"] == "null":
+        if menuItem["rounded_nutrition_info"]["g_fat"] is None:
             menuItem["rounded_nutrition_info"]["g_fat"] = 0
     return menuItems
 
