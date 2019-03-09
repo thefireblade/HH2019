@@ -226,15 +226,15 @@ def sort(menuItems, field):
         newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["g_sugar"])
         return newlist
     elif field == "name":
-        removeAllForElse(menuItems, nutritionFields.get(field))
+        #removeAllForElse(menuItems, nutritionFields.get(field))
         newlist = sorted(menuItems, key=lambda k: k["name"])
         return newlist
     elif field == "location_name":
-        removeAllForElse(menuItems, nutritionFields.get(field))
+        #removeAllForElse(menuItems, nutritionFields.get(field))
         newlist = sorted(menuItems, key=lambda k: k["location_name"])
         return newlist
     elif field == "meal_type":
-        removeAllForElse(menuItems, nutritionFields.get(field))
+        #removeAllForElse(menuItems, nutritionFields.get(field))
         newlist = sorted(menuItems, key=lambda k: k["meal_type"])
         return newlist
     elif field == "price":
