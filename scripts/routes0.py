@@ -137,24 +137,18 @@ def updateMongoWithAllMenus():
 
 
 def getRandomBreakfastItems():
-    reset = "http://34.73.231.100:5000/api/menu/reset"
-    requests.get(reset)
     url = "http://34.73.231.100:5000/api/search/mealtype/Breakfast"
     items = requests.get(url).json()
     index =random.randint(0,len(items))
     return items[index]
 
 def getRandomLunchItems():
-    reset = "http://34.73.231.100:5000/api/menu/reset"
-    requests.get(reset)
     url = "http://34.73.231.100:5000/api/search/mealtype/Lunch"
     items = requests.get(url).json()
     index =random.randint(0,len(items))
     return items[index]
 
 def getRandomDinnerItems():
-    reset = "http://34.73.231.100:5000/api/menu/reset"
-    requests.get(reset)
     url = "http://34.73.231.100:5000/api/search/mealtype/Dinner"
     items = requests.get(url).json()
     index =random.randint(0,len(items))
