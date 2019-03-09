@@ -170,7 +170,7 @@ def getCalories(menuItems, field="calories"):
     list = sort(menuItems, field)
     return list
 
-@app.route('/api/sort/all/calories', methods=['GET'])
+@app.route('/api/sort/all/carbs', methods=['GET'])
 def getCarbs(menuItems, field="carbs"):
     list = sort(menuItems, field)
     return list
@@ -195,7 +195,7 @@ def getSugar(menuItems, field="sugar"):
     list = sort(menuItems, field)
     return list
 
-@app.route('/api/sort/all/sugar', methods=['GET'])
+@app.route('/api/sort/all/name', methods=['GET'])
 def getName(menuItems, field="name"):
     list = sort(menuItems, field)
     return list
@@ -204,3 +204,38 @@ def getName(menuItems, field="name"):
 def getPrice(menuItems, field="price"):
     list = sort(menuItems, field)
     return list
+
+@app.route('/api/sort/all/calories/<int:amount>', methods=['GET'])
+def getCaloriesLessThanEqualTo(menuItems, amount, field="calories"):
+    updated = sortByLessThan(menuItems, field, amount)
+    return updated
+
+@app.route('/api/sort/all/carbs/<int:amount>', methods=['GET'])
+def getCarbsLessThanEqualTo(menuItems, amount, field="carbs"):
+    updated = sortByLessThan(menuItems, field, amount)
+    return updated
+
+@app.route('/api/sort/all/protein/<int:amount>', methods=['GET'])
+def getProteinLessThanEqualTo(menuItems, amount, field="protein"):
+    updated = sortByLessThan(menuItems, field, amount)
+    return updated
+
+@app.route('/api/sort/all/saturatedfat/<int:amount>', methods=['GET'])
+def getSaturatedFatLessThanEqualTo(menuItems, amount, field="saturated fat"):
+    updated = sortByLessThan(menuItems, field, amount)
+    return updated
+
+@app.route('/api/sort/all/fat/<int:amount>', methods=['GET'])
+def getFatLessThanEqualTo(menuItems, amount, field="fat"):
+    updated = sortByLessThan(menuItems, field, amount)
+    return updated
+
+@app.route('/api/sort/all/sugar/<int:amount>', methods=['GET'])
+def getSugarLessThanEqualTo(menuItems, amount, field="sugar"):
+    updated = sortByLessThan(menuItems, field, amount)
+    return updated
+
+@app.route('/api/sort/all/price/<int:amount>', methods=['GET'])
+def getPriceLessThanEqualTo(menuItems, amount, field="price"):
+    updated = sortByLessThan(menuItems, field, amount)
+    return updated
