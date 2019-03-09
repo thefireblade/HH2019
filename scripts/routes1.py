@@ -322,8 +322,6 @@ def getSugarGreaterThan(menuItems, amount, fields="sugar"):
     return updatedList
 
 @app.route('/api/sort/greaterthan/price/<int:amount>', methods=['GET'])
-def getProteinGreaterThan(menuItems, amount, fields="price"):
+def getPriceGreaterThan(menuItems, amount, fields="price"):
     updatedList = sortByGreaterThan(menuItems, fields, amount)
     return updatedList
-
-getCaloriesGreaterThan(menuItems, 101)
