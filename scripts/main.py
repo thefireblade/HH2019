@@ -22,16 +22,5 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = False
 app.register_blueprint(route0)
 app.register_blueprint(route1)
-#
-#
-# if reset:
-#     print('Getting all menu items')
-#     all_menu_items = methods0.getAllMenuItems()
-#     print('Got all menu items')
-#     reset = False
-#
-# @app.route('/api/sort/all/price', methods=['GET'])
-# def returnSortedByPrice():
-#     return jsonify(methods0.sortByPrice(all_menu_items))
 
 app.run(host='0.0.0.0')
