@@ -165,8 +165,6 @@ def generateRandomList(field):
     requests.get(location_url)
     greater_than_api = "http://34.73.231.100:5000/api/sort/greaterthan/price/1.0"
     requests.get(greater_than_api)
-    greater_than_cal = "http://34.73.231.100:5000/api/sort/greaterthan/calories/400.0"
-    requests.get(greater_than_cal)
     breakfastItem = getRandomBreakfastItems()
 
     requests.get(reset)
