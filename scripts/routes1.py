@@ -325,3 +325,11 @@ def getSugarGreaterThan(menuItems, amount, fields="sugar"):
 def getPriceGreaterThan(menuItems, amount, fields="price"):
     updatedList = sortByGreaterThan(menuItems, fields, amount)
     return updatedList
+
+def searchByName(menuItems, name):
+    menuItems = sort(menuItems, nutritionFields.get("name"))
+    list = []
+    for i in menuItems:
+        if i["name"] == name:
+            list.append(i)
+    return list
