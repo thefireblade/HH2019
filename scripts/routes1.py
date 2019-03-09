@@ -185,7 +185,7 @@ def removeAllNone(menuItems, field):
 def sort(menuItems, field):
     menuItems = cleanList(menuItems)
     if field == "calories":
-        removeAllNone(menuItems, field)
+        #removeAllNone(menuItems, field)
         newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["calories"])
         print(newlist)
         return newlist
@@ -227,8 +227,9 @@ def sortByLessThan(menuItems, field, amount):
     return updatedList
 
 @app.route('/api/sort/all/calories', methods=['GET'])
-def getCalories(menuItems = getLatestMenu(), field="calories"):
+def getCalories(field="calories"):
     menuItems = getLatestMenu()
+    print(menuItems)
     list = sort(menuItems, field)
     return list
 
