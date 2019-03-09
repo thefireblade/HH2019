@@ -32,9 +32,10 @@ def getAllMenuItems():
     #r = requests.post(url = API_ENDPOINT, data = data)
     location_response = requests.get(url = location_api)
     locations = location_response.json()
-
     for location in locations:
         location_name = location['name']
+        if location_name == "Admin Cart":
+            continue
         for menuTypes in location['active_menu_types']:
             menu_type = menuTypes['name']
             menu_url = "https://stonybrook.nutrislice.com" + menuTypes['urls']['full_menu_by_date_api_url_template']
