@@ -62,31 +62,37 @@ def api_id():
 # r = requests.get(url = "", )
 # data = r.json()
 
+nutritionFields = {
+    "calories": "calories",
+    "carbs": "g_carbs",
 
-def sortByCalories(menuItems):
-    newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["calories"])
-    return newlist
+}
 
-def sortByCarbs(menuItems):
-    newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["g_carbs"])
-    return newlist
+# Valid fields are: calories, carbs, protein, fat, saturated fat, sugar, name
+def sort(menuItems, field):
+    if field == "calories":
+        newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["calories"])
+        return newlist
+    elif field == "carbs":
+        newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["g_carbs"])
+        return newlist
+    elif field == "protein":
+        newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["g_protein"])
+        return newlist
+    elif field == "saturated fat":
+        newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["g_saturated_fat"])
+        return newlist
+    elif field == "fat":
+        newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["g_fat"])
+        return newlist
+    elif field == "sugar":
+        newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["g_sugar"])
+        return newlist
+    elif field == "name":
+        newlist = sorted(menuItems, key=lambda k: k["name"])
+        return newlist
+    elif field == "price":
 
-def sortByProtein(menuItems):
-    newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["g_protein"])
-    return newlist
-
-def sortBySaturatedFat(menuItems):
-    newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["g_saturated_fat"])
-    return newlist
-
-def sortByFat(menuItems):
-    newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["g_fat"])
-    return newlist
-
-def sortBySugar(menuItems):
-    newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["g_sugar"])
-    return newlist
-
-def sortByName(menuItems):
-    newlist = sorted(menuItems, key=lambda k: k["name"])
-    return newlist
+def sortByLessThan(menuItems, field, amount):
+    rawList = sort(menuItems, field)
+    updatedList = []
