@@ -96,4 +96,4 @@ def returnSortedByPrice():
 @app.route('/api/menu/update', methods=['GET'])
 def updateMongoWithAllMenus():
     getAllMenuItems()
-    return jsonify('Success':True)
+    return jsonify({'Success':True})
