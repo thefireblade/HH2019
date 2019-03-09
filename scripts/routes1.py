@@ -194,6 +194,12 @@ def sort(menuItems, field):
     elif field == "name":
         newlist = sorted(menuItems, key=lambda k: k["name"])
         return newlist
+    elif field == "location_name":
+        newlist = sorted(menuItems, key=lambda k: k["location_name"])
+        return newlist
+    elif field == "meal_type":
+        newlist = sorted(menuItems, key=lambda k: k["meal_type"])
+        return newlist
     elif field == "price":
         newlist = sorted(menuItems, key=lambda k: k["price"])
         return newlist
@@ -324,4 +330,23 @@ def getSugarGreaterThan(menuItems, amount, fields="sugar"):
 @app.route('/api/sort/greaterthan/price/<int:amount>', methods=['GET'])
 def getPriceGreaterThan(menuItems, amount, fields="price"):
     updatedList = sortByGreaterThan(menuItems, fields, amount)
+    return updatedList
+
+@app.route('/api/search/name/', methods=['GET'])
+def searchByName(menuItems, name):
+    menuItems = sort(menuItems, nutritionFields.get("name"))
+    list = []
+    for i in menuItems:
+        if i["name"] == name:
+            list.append(i)
+    return list
+
+@app.route('/api/search/location/', methods=['GET'])
+def searchByLocation(menuItems, field):
+    rawList = sort(menuItems, "location_name")
+    updatedList = []
+    for i in rawList:
+        if i["location_name"] == field:
+            updatedList.append(i)
+    print(json.dumps(updatedList, indent=4, sort_keys=False))
     return updatedList
