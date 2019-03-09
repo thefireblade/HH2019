@@ -138,25 +138,25 @@ def cleanList(menuItems):
         if menuItem["price"] == 0.0:
             menuItems.remove(menuItem)
             continue
-        if menuItem["rounded_nutrition_info"]["calories"] == "null":
+        if menuItem["rounded_nutrition_info"]["calories"] == "null" or menuItem["rounded_nutrition_info"]["calories"] is None:
             menuItem["rounded_nutrition_info"]["calories"] = 0.0
-        if menuItem["rounded_nutrition_info"]["g_carbs"] == "null":
+        if menuItem["rounded_nutrition_info"]["g_carbs"] == "null" or menuItem["rounded_nutrition_info"]["g_carbs"] is None:
             menuItem["rounded_nutrition_info"]["g_carbs"] = 0.0
-        if menuItem["rounded_nutrition_info"]["g_fiber"] == "null":
+        if menuItem["rounded_nutrition_info"]["g_fiber"] == "null" or menuItem["rounded_nutrition_info"]["g_fiber"] is None:
             menuItem["rounded_nutrition_info"]["g_fiber"] = 0.0
-        if menuItem["rounded_nutrition_info"]["mg_vitamin_d"] == "null":
+        if menuItem["rounded_nutrition_info"]["mg_vitamin_d"] == "null" or menuItem["rounded_nutrition_info"]["mg_vitamin_d"] is None:
             menuItem["rounded_nutrition_info"]["mg_vitamin_d"] = 0.0
-        if menuItem["rounded_nutrition_info"]["mg_potassium"] == "null":
+        if menuItem["rounded_nutrition_info"]["mg_potassium"] == "null" or menuItem["rounded_nutrition_info"]["mg_potassium"] is None:
             menuItem["rounded_nutrition_info"]["mg_potassium"] = 0.0
-        if menuItem["rounded_nutrition_info"]["mg_calcium"] == "null":
+        if menuItem["rounded_nutrition_info"]["mg_calcium"] == "null" or menuItem["rounded_nutrition_info"]["mg_calcium"] is None:
             menuItem["rounded_nutrition_info"]["mg_calcium"] = 0.0
-        if menuItem["rounded_nutrition_info"]["iu_vitamin_a"] == "null":
+        if menuItem["rounded_nutrition_info"]["iu_vitamin_a"] == "null" or menuItem["rounded_nutrition_info"]["iu_vitamin_a"] is None:
             menuItem["rounded_nutrition_info"]["iu_vitamin_a"] = 0.0
-        if menuItem["rounded_nutrition_info"]["g_added_sugar"] == "null":
+        if menuItem["rounded_nutrition_info"]["g_added_sugar"] == "null" or menuItem["rounded_nutrition_info"]["g_added_sugar"] is None:
             menuItem["rounded_nutrition_info"]["g_added_sugar"] = 0.0
-        if menuItem["rounded_nutrition_info"]["mg_cholesterol"] == "null":
+        if menuItem["rounded_nutrition_info"]["mg_cholesterol"] == "null" or menuItem["rounded_nutrition_info"]["mg_cholesterol"] is None:
             menuItem["rounded_nutrition_info"]["mg_cholesterol"] = 0.0
-        if menuItem["rounded_nutrition_info"]["mg_iron"] == "null":
+        if menuItem["rounded_nutrition_info"]["mg_iron"] == "null" or menuItem["rounded_nutrition_info"]["mg_iron"] is None:
             menuItem["rounded_nutrition_info"]["mg_iron"] = 0
         if menuItem["rounded_nutrition_info"]["mg_sodium"] == "null":
             menuItem["rounded_nutrition_info"]["mg_sodium"] = 0
