@@ -170,13 +170,11 @@ def generateRandomList(field):
     requests.get(reset)
     requests.get(location_url)
     requests.get(greater_than_api)
-    requests.get(greater_than_cal)
     lunchItem = getRandomLunchItems()
 
     requests.get(reset)
     requests.get(location_url)
     requests.get(greater_than_api)
-    requests.get(greater_than_cal)
     dinnerItem = getRandomDinnerItems()
 
     requests.get(reset)
