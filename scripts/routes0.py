@@ -98,7 +98,7 @@ def sortByPrice(arr):
     newlist = sorted(arr, key=lambda k: k["price"])
     return newlist
 
-def getTempMenu():
+#def getTempMenu():
 
 
 @app.route('/api/sort/all/price', methods=['GET'])
