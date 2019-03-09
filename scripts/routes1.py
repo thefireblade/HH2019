@@ -396,6 +396,8 @@ def searchByType(field):
     rawList = sort(menuItems, "meal_type")
     updatedList = []
     for i in rawList:
+        if i is None:
+            continue
         for j in i["meal_type"]:
             if j == field:
                 updatedList.append(i)
