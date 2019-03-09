@@ -115,8 +115,8 @@ def getTempMenu():
 
 @app.route('/api/sort/all/price', methods=['GET'])
 def returnSortedByPrice():
-    menuItems = getLatestMenu()
-    return jsonify(sortByPrice(menuItems))
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sortByPrice(menuItems)))
 
 @app.route("/api/menu/all", methods=['GET'])
 def returnAllMenus():
