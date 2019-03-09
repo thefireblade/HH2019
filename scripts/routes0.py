@@ -81,9 +81,17 @@ def getLatestMenu():
 def updateMenu(menuItems):
     mongoClient = pymongo.MongoClient("mongodb://localhost:27017/")
     mydb = mongoClient['hh2019']
-    myCol = mydb['MenuItems']
-    myCol.update({'year': datetime.now().year, 'month': datetime.now().month, 'day': datetime.now().day}, {"$set": {'menuItems':menuItems}})
+    myCol = mydb['temp']
+    myCol.remove({})
+    document =  {}
+    document['year'] =  datetime.now().year
+    document['month'] = datetime.now().month
+    document['day'] = datetime.now().day
+    document['menuItems'] = menuItems
+    myCol.insert(document)
     return menuItems
+
+
 #remove all null prices
 def zeroNullPrices(arr):
     for item in arr:
@@ -98,18 +106,29 @@ def sortByPrice(arr):
     newlist = sorted(arr, key=lambda k: k["price"])
     return newlist
 
-#def getTempMenu():
-
+def getTempMenu():
+    mongoClient = pymongo.MongoClient("mongodb://localhost:27017/")
+    mydb = mongoClient['hh2019']
+    myCol = mydb['temp']
+    temp = myCol.find()[0]
+    return temp['menuItems']
 
 @app.route('/api/sort/all/price', methods=['GET'])
 def returnSortedByPrice():
-    menuItems = getLatestMenu()
-    return jsonify(sortByPrice(menuItems))
-@app.route("/api/menu/all", methods=['Get'])
+    menuItems = getTempMenu()
+    return jsonify(updateMenu(sortByPrice(menuItems)))
+
+@app.route("/api/menu/all", methods=['GET'])
 def returnAllMenus():
     menuItems = getLatestMenu()
     return jsonify(menuItems)
-#@app.route("/api/menu/reset", methods=['Get'])
+
+@app.route("/api/menu/reset", methods=['GET'])
+def copyAllOverTemp():
+    menuItems = getLatestMenu()
+    updateMenu(menuItems)
+    return jsonify({'Success':True})
+
 @app.route('/api/menu/update', methods=['GET'])
 def updateMongoWithAllMenus():
     getAllMenuItems()
