@@ -138,25 +138,25 @@ def cleanList(menuItems):
         if menuItem["price"] == 0.0:
             menuItems.remove(menuItem)
             continue
-        if menuItem["rounded_nutrition_info"]["calories"] == "null" or menuItem["rounded_nutrition_info"]["calories"] is None:
+        if menuItem["rounded_nutrition_info"]["calories"] == "null":
             menuItem["rounded_nutrition_info"]["calories"] = 0.0
-        if menuItem["rounded_nutrition_info"]["g_carbs"] == "null" or menuItem["rounded_nutrition_info"]["g_carbs"] is None:
+        if menuItem["rounded_nutrition_info"]["g_carbs"] == "null":
             menuItem["rounded_nutrition_info"]["g_carbs"] = 0.0
-        if menuItem["rounded_nutrition_info"]["g_fiber"] == "null" or menuItem["rounded_nutrition_info"]["g_fiber"] is None:
+        if menuItem["rounded_nutrition_info"]["g_fiber"] == "null":
             menuItem["rounded_nutrition_info"]["g_fiber"] = 0.0
-        if menuItem["rounded_nutrition_info"]["mg_vitamin_d"] == "null" or menuItem["rounded_nutrition_info"]["mg_vitamin_d"] is None:
+        if menuItem["rounded_nutrition_info"]["mg_vitamin_d"] == "null":
             menuItem["rounded_nutrition_info"]["mg_vitamin_d"] = 0.0
-        if menuItem["rounded_nutrition_info"]["mg_potassium"] == "null" or menuItem["rounded_nutrition_info"]["mg_potassium"] is None:
+        if menuItem["rounded_nutrition_info"]["mg_potassium"] == "null":
             menuItem["rounded_nutrition_info"]["mg_potassium"] = 0.0
-        if menuItem["rounded_nutrition_info"]["mg_calcium"] == "null" or menuItem["rounded_nutrition_info"]["mg_calcium"] is None:
+        if menuItem["rounded_nutrition_info"]["mg_calcium"] == "null":
             menuItem["rounded_nutrition_info"]["mg_calcium"] = 0.0
-        if menuItem["rounded_nutrition_info"]["iu_vitamin_a"] == "null" or menuItem["rounded_nutrition_info"]["iu_vitamin_a"] is None:
+        if menuItem["rounded_nutrition_info"]["iu_vitamin_a"] == "null":
             menuItem["rounded_nutrition_info"]["iu_vitamin_a"] = 0.0
-        if menuItem["rounded_nutrition_info"]["g_added_sugar"] == "null" or menuItem["rounded_nutrition_info"]["g_added_sugar"] is None:
+        if menuItem["rounded_nutrition_info"]["g_added_sugar"] == "null":
             menuItem["rounded_nutrition_info"]["g_added_sugar"] = 0.0
-        if menuItem["rounded_nutrition_info"]["mg_cholesterol"] == "null" or menuItem["rounded_nutrition_info"]["mg_cholesterol"] is None:
+        if menuItem["rounded_nutrition_info"]["mg_cholesterol"] == "null":
             menuItem["rounded_nutrition_info"]["mg_cholesterol"] = 0.0
-        if menuItem["rounded_nutrition_info"]["mg_iron"] == "null" or menuItem["rounded_nutrition_info"]["mg_iron"] is None:
+        if menuItem["rounded_nutrition_info"]["mg_iron"] == "null":
             menuItem["rounded_nutrition_info"]["mg_iron"] = 0
         if menuItem["rounded_nutrition_info"]["mg_sodium"] == "null":
             menuItem["rounded_nutrition_info"]["mg_sodium"] = 0
@@ -179,15 +179,14 @@ def cleanList(menuItems):
 # Valid fields are: calories, carbs, protein, fat, saturated fat, sugar, name, price
 def removeAllNone(menuItems, field):
     for menuItem in menuItems:
-        if menuItem["rounded_nutrition_info"][nutritionFields.get(field)] is None:
+        if type(menuItem["rounded_nutrition_info"][nutritionFields.get(field)]) is not float:
             menuItems.remove(menuItem)
 
 def sort(menuItems, field):
     menuItems = cleanList(menuItems)
     if field == "calories":
-        #removeAllNone(menuItems, field)
+        removeAllNone(menuItems, field)
         newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["calories"])
-        print(newlist)
         return newlist
     elif field == "carbs":
         newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["g_carbs"])
@@ -229,7 +228,6 @@ def sortByLessThan(menuItems, field, amount):
 @app.route('/api/sort/all/calories', methods=['GET'])
 def getCalories(field="calories"):
     menuItems = getLatestMenu()
-    print(menuItems)
     list = sort(menuItems, field)
     return list
 
@@ -386,7 +384,7 @@ def searchByLocation(field):
     for i in rawList:
         if i["location_name"] == field:
             updatedList.append(i)
-    print(json.dumps(updatedList, indent=4, sort_keys=False))
+    #print(json.dumps(updatedList, indent=4, sort_keys=False))
     return updatedList
 
 @app.route('/api/search/mealtype/', methods=['GET'])
@@ -398,5 +396,5 @@ def searchByType(field):
         for j in i["meal_type"]:
             if j == field:
                 updatedList.append(i)
-    print(json.dumps(updatedList, indent=4, sort_keys=False))
+    #print(json.dumps(updatedList, indent=4, sort_keys=False))
     return updatedList
