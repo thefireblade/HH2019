@@ -161,7 +161,7 @@ def getRandomDinnerItems():
     return items[index]
 
 @app.route('/api/menu/generateRandom/<string:field>', methods=['GET'])
-def generateRandomList(field)
+def generateRandomList(field):
     menuItems = getLatestMenu()
     generatedList = []
     reset = "http://34.73.231.100:5000/api/menu/reset"
