@@ -72,7 +72,7 @@ def getLatestMenu():
         MenuItems = myCol.find_one({'year': datetime.now().year, 'month': datetime.now().month, 'day': datetime.now().day})
         if MenuItems is None:
             getAllMenuItems()
-        return MenuItems
+        return MenuItems['menuItems']
     except:
         getAllMenuItems()
         MenuItems = myCol.find_one({'year': datetime.now().year, 'month': datetime.now().month, 'day': datetime.now().day})
@@ -88,18 +88,16 @@ def updateMenu(menuItems):
 def zeroNullPrices(arr):
     for item in arr:
         print(item)
-        try:
-            if item['price'] is None:
-                item['price'] = 0
-        except:
-            print("this item has no fields")
+        if item['price'] is None:
+            item['price'] = 0
 '''
 Takes  in  an array with a price field
 '''
 #test = [ {'price':3.00}, {'price':1.00}, {'price':1.5}, {'price':5.00}]
 def sortByPrice(arr):
     zeroNullPrices(arr)
-    return arr
+    newlist = sorted(arr, key=lambda k: k["price"])
+    return newlist
 
 
 @app.route('/api/sort/all/price', methods=['GET'])
