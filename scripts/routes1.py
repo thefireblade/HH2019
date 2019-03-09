@@ -143,6 +143,10 @@ def sortByLessThan(menuItems, field, amount):
                 updatedList.append(i)
     return updatedList
 
+@app.route('/api', methods=['GET'])
+def reference():
+    return app.send_static_file('Resference.html')
+
 @app.route('/api/sort/all/calories', methods=['GET'])
 def getCalories(field="calories"):
     menuItems = getTempMenu()

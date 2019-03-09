@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.fa-anchor,.fa-coffee {font-size:200px}
+    html {
+  scroll-behavior: smooth;
+}
+</style>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-red w3-card w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
+    <a href="#menu" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">/menu</a>
+    <a href="#sort" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">/sort</a>
+    <a href="#search" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">/search</a>
+  </div>
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+    <a href="#menu" class="w3-bar-item w3-button w3-padding-large">/menu</a>
+    <a href="#sort" class="w3-bar-item w3-button w3-padding-large">/sort</a>
+    <a href="#search" class="w3-bar-item w3-button w3-padding-large">/search</a>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="w3-container w3-red w3-center" style="padding:128px 16px">
+  <h1 class="w3-margin w3-jumbo">API Reference</h1>
+  <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top"><a href="#menu"></a>Get Started</button>
+</header>
+
+<!-- First Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container" id="menu">
+  <div class="w3-content">
+    <div class="w3-twothird">
+          <h1>/menu</h1>
+      <h5 class="w3-padding-32">This is the main endpoint for the application. All queries related to the whole menu goes here.</h5>
+
+      <p class="w3-text-grey">
+          <ul>
+        <li>-/api/menu/all</li>
+        <ul>
+            <li>Returns all menu items in a list</li>
+        </ul>
+        <li>-/api/menu/reset</li>
+        <ul>
+            <li>Sets the temporary menu to the full menu</li>
+        </ul>
+        <li>-/api/menu/update</li>
+        <ul>
+            <li>Updates the menu</li>
+        </ul>
+    </ul>
+      </p>
+    </div>
+
+    <div class="w3-third w3-center">
+      <i class="fa fa-anchor w3-padding-64 w3-text-red"></i>
+    </div>
+  </div>
+</div>
+
+<!-- Second Grid -->
+<div class="w3-row-padding w3-light-grey w3-padding-64 w3-container" id="sort">
+  <div class="w3-content">
+    <div class="w3-third w3-center">
+      <i class="fa fa-coffee w3-padding-64 w3-text-red w3-margin-right"></i>
+    </div>
+
+    <div class="w3-twothird">
+          <h1>/sort</h1>
+      <h5 class="w3-padding-32">This it the endpoint for all queries relating to sorting based on the parameters specified.</h5>
+
+      <p class="w3-text-grey">
+          <ul>
+        <li>-/api/sort/all/price</li>
+        <ul>
+            <li>Updates the list and sorts all of the menu items</li>
+        </ul>
+        <li>-api/sort/all/{field}</li>
+        <ul>
+            <li>{field} can be of the following:</li>
+            <ul>
+                <li>calories</li>
+                <li>carbs</li>
+                <li>protein</li>
+                <li>fat</li>
+                <li>saturated fat</li>
+                <li>sugar</li>
+                <li>name</li>
+                <li>price</li>
+            </ul>
+        </ul>
+        <li>-api/sort/lessthanequalto/{field}/&ltint:amount&gt</li>
+        <ul>
+            <li>{field} can be the same as -/api/sort/all. The menu items are sorted and only the items less than the amount specified are returned.</li>
+        </ul>
+        <li>-api/sort/greaterthan/{field}/&ltint:amount&gt</li>
+        <ul>
+            <li>{field} can be the same as -/api/sort/all. The menu items are sorted and only the items greater than the amount specified are returned</li>
+        </ul>
+    </ul>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Third Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container" id="search">
+  <div class="w3-content">
+    <div class="w3-twothird">
+          <h1>/search</h1>
+      <h5 class="w3-padding-32">This is the endpoint for all queries relating to searching based on the parameters specified.</h5>
+      <p class="w3-text-grey">
+          <ul>
+        <li>-/api/search/name/{name}</li>
+        <ul>
+            <li>Filter by {name} of a menu item</li>
+        </ul>
+        <li>-/api/search/location/{location}</li>
+        <ul>
+            <li>Filter by {location}</li>
+        </ul>
+        <li>-/api/search/mealtype/{mealtype}</li>
+        <ul>
+            <li>Filter by {mealtype}, valid replacements are: {"Breakfast", "Lunch", "Dinner"}</li>
+        </ul>
+    </ul>
+      </p>
+    </div>
+
+    <div class="w3-third w3-center">
+      <i class="fa fa-anchor w3-padding-64 w3-text-red"></i>
+    </div>
+  </div>
+</div>
+
+<div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
+    <h1 class="w3-margin w3-xlarge">Quote of the day: No semicolons were missed while coding this project.</h1>
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-center w3-opacity">
+  <div class="w3-xlarge w3-padding-32">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+ </div>
+ <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>
+
+<script>
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+
+$("nav").find("a").click(function(e) {
+    e.preventDefault();
+    var section = $(this).attr("href");
+    $("html, body").animate({
+        scrollTop: $(section).offset().top
+    });
+});
+</script>
+
+</body>
+</html>
+
