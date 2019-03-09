@@ -138,7 +138,7 @@ def cleanList(menuItems):
         if menuItem["price"] == 0.0:
             menuItems.remove(menuItem)
             continue
-        if menuItem["rounded_nutrition_info"]["calories"] == "null":
+        if menuItem["rounded_nutrition_info"]["calories"] is None:
             menuItem["rounded_nutrition_info"]["calories"] = 0.0
         if menuItem["rounded_nutrition_info"]["g_carbs"] == "null":
             menuItem["rounded_nutrition_info"]["g_carbs"] = 0.0
