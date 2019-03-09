@@ -374,7 +374,7 @@ def searchByName(name):
     menuItems = sort(menuItems, nutritionFields.get("name"))
     list = []
     for i in menuItems:
-        if i["name"] == name:
+        if name in i["name"]:
             list.append(i)
     return jsonify(updateMenu(list))
 
