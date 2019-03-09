@@ -5,7 +5,7 @@ from flask import request, jsonify, Blueprint
 
 import routes0 as methods0
 import flask
-import mysql.connector
+#import mysql.connector
 '''
 mydb = mysql.connector.connect(
     host="localhost",
