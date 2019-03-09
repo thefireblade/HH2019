@@ -194,6 +194,9 @@ def sort(menuItems, field):
     elif field == "name":
         newlist = sorted(menuItems, key=lambda k: k["name"])
         return newlist
+    elif field == "location_name":
+        newlist = sorted(menuItems, key=lambda k: k["location_name"])
+        return newlist
     elif field == "price":
         newlist = sorted(menuItems, key=lambda k: k["price"])
         return newlist
