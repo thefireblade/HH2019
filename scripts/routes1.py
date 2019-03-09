@@ -77,45 +77,58 @@ menuItems = [
         {
             "name": "pizza",
             "rounded_nutrition_info": {
-            "calories": 230.0,
-            "g_carbs": 41.0,
-                            "g_fiber": 6.0,
-                            "mg_vitamin_d": 0.0,
-                            "mg_potassium": "null",
-                            "mg_calcium": 42.3,
-                            "iu_vitamin_a": "null",
-                            "g_added_sugar": "null",
-                            "mg_cholesterol": 0.0,
-                            "mg_iron": 2.6,
-                            "mg_sodium": 15.0,
-                            "mg_vitamin_c": 0.0,
-                            "g_trans_fat": "null",
-                            "re_vitamin_a": "null",
-                            "g_protein": 8.0,
-                            "g_sugar": 1.0,
-                            "g_saturated_fat": 0.5,
-                            "g_fat": 4.0}, "location_name": "eastdining", "menu_type": "kosher",
-         "meal_type": ["Breakfast", "Lunch", "Dinner"]},
-        {"name": "bread", "rounded_nutrition_info": {
-                            "calories": 130.0,
-                            "g_carbs": 14.0,
-                            "g_fiber": 1.0,
-                            "mg_vitamin_d": "null",
-                            "mg_potassium": "null",
-                            "mg_calcium": 26.2,
-                            "iu_vitamin_a": "null",
-                            "g_added_sugar": "null",
-                            "mg_cholesterol": 35.0,
-                            "mg_iron": 1.0,
-                            "mg_sodium": 550.0,
-                            "mg_vitamin_c": 2.5,
-                            "g_trans_fat": "null",
-                            "re_vitamin_a": "null",
-                            "g_protein": 11.0,
-                            "g_sugar": "null",
-                            "g_saturated_fat": 0.5,
-                            "g_fat": 3.5}, "location_name": "westdining", "menu_type": "kosher",
-         "meal_type": ["Breakfast", "Lunch", "Dinner"]}]
+                "calories": 230.0,
+                "g_carbs": 41.0,
+                "g_fiber": 6.0,
+                "mg_vitamin_d": 0.0,
+                "mg_potassium": "null",
+                "mg_calcium": 42.3,
+                "iu_vitamin_a": "null",
+                "g_added_sugar": "null",
+                "mg_cholesterol": 0.0,
+                "mg_iron": 2.6,
+                "mg_sodium": 15.0,
+                "mg_vitamin_c": 0.0,
+                "g_trans_fat": "null",
+                "re_vitamin_a": "null",
+                "g_protein": 8.0,
+                "g_sugar": 1.0,
+                "g_saturated_fat": 0.5,
+                "g_fat": 4.0
+            },
+            "location_name": "eastdining",
+            "menu_type": "kosher",
+            "meal_type":
+                ["Breakfast", "Lunch", "Dinner"]
+        },
+        {
+            "name": "bread",
+            "rounded_nutrition_info": {
+                "calories": 100.0,
+                "g_carbs": 23.0,
+                "g_fiber": 77.0,
+                "mg_vitamin_d": 3.0,
+                "mg_potassium": "null",
+                "mg_calcium": 23.0,
+                "iu_vitamin_a": "null",
+                "g_added_sugar": "null",
+                "mg_cholesterol": 0.1,
+                "mg_iron": 5.0,
+                "mg_sodium": 11.0,
+                "mg_vitamin_c": 0.2,
+                "g_trans_fat": "null",
+                "re_vitamin_a": "null",
+                "g_protein": 16.0,
+                "g_sugar": 5.0,
+                "g_saturated_fat": 0.7,
+                "g_fat": 7.0
+            },
+            "location_name": "westdining",
+            "menu_type": "kosher",
+            "meal_type":
+                ["Breakfast", "Lunch", "Dinner"]
+        }
+]
 # Valid fields are: calories, carbs, protein, fat, saturated fat, sugar, name, price
 def sort(menuItems, field):
     if field == "calories":
@@ -150,6 +163,44 @@ def sortByLessThan(menuItems, field, amount):
         if i[nutritionFields.get("nutrition")][nutritionFields.get(field)] <= amount:
             updatedList.append(i)
     print(json.dumps(updatedList, indent=4, sort_keys=False))
+    return updatedList
 
+@app.route('/api/sort/all/calories', methods=['GET'])
+def getCalories(menuItems, field="calories"):
+    list = sort(menuItems, field)
+    return list
 
-sortByLessThan(menuItems, "carbs", 20)
+@app.route('/api/sort/all/calories', methods=['GET'])
+def getCarbs(menuItems, field="carbs"):
+    list = sort(menuItems, field)
+    return list
+
+@app.route('/api/sort/all/protein', methods=['GET'])
+def getProtein(menuItems, field="protein"):
+    list = sort(menuItems, field)
+    return list
+
+@app.route('/api/sort/all/saturatedfat', methods=['GET'])
+def getSaturatedFat(menuItems, field="saturated fat"):
+    list = sort(menuItems, field)
+    return list
+
+@app.route('/api/sort/all/fat', methods=['GET'])
+def getFat(menuItems, field="fat"):
+    list = sort(menuItems, field)
+    return list
+
+@app.route('/api/sort/all/sugar', methods=['GET'])
+def getSugar(menuItems, field="sugar"):
+    list = sort(menuItems, field)
+    return list
+
+@app.route('/api/sort/all/sugar', methods=['GET'])
+def getName(menuItems, field="name"):
+    list = sort(menuItems, field)
+    return list
+
+@app.route('/api/sort/all/price', methods=['GET'])
+def getPrice(menuItems, field="price"):
+    list = sort(menuItems, field)
+    return list
