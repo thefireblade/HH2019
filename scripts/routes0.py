@@ -94,7 +94,6 @@ Takes  in  an array with a price field
 '''
 #test = [ {'price':3.00}, {'price':1.00}, {'price':1.5}, {'price':5.00}]
 def sortByPrice(arr):
-
     zeroNullPrices(arr)
     newlist = sorted(arr, key=lambda k: k["price"])
     return newlist
@@ -103,7 +102,7 @@ def sortByPrice(arr):
 @app.route('/api/sort/all/price', methods=['GET'])
 def returnSortedByPrice():
     menuItems = getLatestMenu()
-    return jsonify(updateMenu(sortByPrice(menuItems['menuItems'])))
+    return jsonify(updateMenu(sortByPrice(menuItems)))
 @app.route('/api/menu/update', methods=['GET'])
 def updateMongoWithAllMenus():
     getAllMenuItems()
