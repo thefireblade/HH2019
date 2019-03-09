@@ -238,13 +238,13 @@ def sortByLessThan(menuItems, field, amount):
 def getCalories(field="calories"):
     menuItems = getLatestMenu()
     list = sort(menuItems, field)
-    return list
+    return jsonify(list)
 
 @app.route('/api/sort/all/carbs', methods=['GET'])
 def getCarbs(field="carbs"):
     menuItems = getLatestMenu()
     list = sort(menuItems, field)
-    return list
+    return jsonify(list)
 
 @app.route('/api/sort/all/protein', methods=['GET'])
 def getProtein(field="protein"):
