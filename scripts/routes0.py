@@ -88,7 +88,7 @@ def updateMenu(menuItems):
 def zeroNullPrices(arr):
     for item in arr:
         if item['price'] is None:
-            item['price'] = 0
+            arr.remove(item)
 '''
 Takes  in  an array with a price field
 '''
@@ -97,6 +97,8 @@ def sortByPrice(arr):
     zeroNullPrices(arr)
     newlist = sorted(arr, key=lambda k: k["price"])
     return newlist
+
+def getTempMenu():
 
 
 @app.route('/api/sort/all/price', methods=['GET'])
@@ -107,6 +109,7 @@ def returnSortedByPrice():
 def returnAllMenus():
     menuItems = getLatestMenu()
     return jsonify(menuItems)
+@app.route("/api/menu/reset", methods['Get'])
 @app.route('/api/menu/update', methods=['GET'])
 def updateMongoWithAllMenus():
     getAllMenuItems()
