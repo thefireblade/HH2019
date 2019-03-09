@@ -258,6 +258,7 @@ def getPriceGreaterThan(amount, fields="price"):
 
 @app.route('/api/search/name/<string:name>', methods=['GET'])
 def searchByName(name):
+    name = name.replace("%20", " ")
     menuItems = getTempMenu()
     menuItems = sort(menuItems, nutritionFields.get("name"))
     list = []
@@ -268,6 +269,7 @@ def searchByName(name):
 
 @app.route('/api/search/location/<string:field>', methods=['GET'])
 def searchByLocation(field):
+    field = field.replace("%20", " ")
     menuItems = getTempMenu()
     rawList = sort(menuItems, "location_name")
     updatedList = []
@@ -279,6 +281,7 @@ def searchByLocation(field):
 
 @app.route('/api/search/mealtype/<string:field>', methods=['GET'])
 def searchByType(field):
+    field = field.replace("%20", " ")
     menuItems = getTempMenu()
     rawList = sort(menuItems, "meal_type")
     updatedList = []
