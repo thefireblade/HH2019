@@ -193,12 +193,11 @@ def removeAllNone(menuItems, field):
 
 def sort(menuItems, field):
     #menuItems = cleanList(menuItems)
+    removeAllNone(menuItems, nutritionFields.get(field))
     if field == "calories":
-        removeAllNone(menuItems, nutritionFields.get(field))
         newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["calories"])
         return newlist
     elif field == "carbs":
-        removeAllNone(menuItems, nutritionFields.get(field))
         newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["g_carbs"])
         return newlist
     elif field == "protein":
