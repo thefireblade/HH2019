@@ -139,19 +139,19 @@ def updateMongoWithAllMenus():
 def getRandomBreakfastItems():
     url = "http://34.73.231.100:5000/api/search/mealtype/Breakfast"
     items = requests.get(url).json()
-    index =random.randint(0,len(items))
+    index =random.randint(0,len(items) - 1)
     return items[index]
 
 def getRandomLunchItems():
     url = "http://34.73.231.100:5000/api/search/mealtype/Lunch"
     items = requests.get(url).json()
-    index =random.randint(0,len(items))
+    index =random.randint(0,len(items) - 1)
     return items[index]
 
 def getRandomDinnerItems():
     url = "http://34.73.231.100:5000/api/search/mealtype/Dinner"
     items = requests.get(url).json()
-    index =random.randint(0,len(items))
+    index =random.randint(0,len(items) - 1)
     return items[index]
 
 @app.route('/api/menu/generateRandom/<string:field>', methods=['GET'])
@@ -165,7 +165,7 @@ def generateRandomList(field):
     requests.get(location_url)
     greater_than_api = "http://34.73.231.100:5000/api/sort/greaterthan/price/1.0"
     requests.get(greater_than_api)
-    greater_than_cal = "http://34.73.231.100:5000/api/sort/greaterthan/calories/300.0"
+    greater_than_cal = "http://34.73.231.100:5000/api/sort/greaterthan/calories/400.0"
     requests.get(greater_than_cal)
     breakfastItem = getRandomBreakfastItems()
 
