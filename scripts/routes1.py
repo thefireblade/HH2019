@@ -220,8 +220,8 @@ def sortByLessThan(menuItems, field, amount):
     return updatedList
 
 @app.route('/api/sort/all/calories', methods=['GET'])
-def getCalories(field="calories"):
-    menuItems = getLatestMenu()
+def getCalories(menuItems = getLatestMenu(), field="calories"):
+
     list = sort(menuItems, field)
     return list
 
