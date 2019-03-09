@@ -177,9 +177,15 @@ def cleanList(menuItems):
     return menuItems
 
 # Valid fields are: calories, carbs, protein, fat, saturated fat, sugar, name, price
+def removeAllNone(menuItems, field):
+    for menuItem in menuItems:
+        if menuItem[nutritionFields.get(field)] is None:
+            menuItems.remove(menuItem)
+            continue
 def sort(menuItems, field):
     menuItems = cleanList(menuItems)
     if field == "calories":
+        removeAllNone(menuItems, field)
         newlist = sorted(menuItems, key=lambda k: k["rounded_nutrition_info"]["calories"])
         print(newlist)
         return newlist
