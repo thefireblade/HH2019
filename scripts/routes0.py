@@ -163,18 +163,22 @@ def generateRandomList(field):
 
     location_url = "http://34.73.231.100:5000/api/search/location/" + field
     requests.get(location_url)
-    greater_than_api = "http://34.73.231.100:5000/api/sort/greaterthan/price/1.0"
+    greater_than_api = "http://34.73.231.100:5000/api/sort/greaterthan/price/1"
     requests.get(greater_than_api)
+    greater_than_cal = "http://34.73.231.100:5000/api/sort/greaterthan/calories/500"
+    requests.get(greater_than_cal)
     breakfastItem = getRandomBreakfastItems()
 
     requests.get(reset)
     requests.get(location_url)
     requests.get(greater_than_api)
+    requests.get(greater_than_cal)
     lunchItem = getRandomLunchItems()
 
     requests.get(reset)
     requests.get(location_url)
     requests.get(greater_than_api)
+    requests.get(greater_than_cal)
     dinnerItem = getRandomDinnerItems()
 
     requests.get(reset)
