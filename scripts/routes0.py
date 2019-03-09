@@ -102,7 +102,7 @@ def sortByPrice(arr):
 @app.route('/api/sort/all/price', methods=['GET'])
 def returnSortedByPrice():
     menuItems = getLatestMenu()
-    return jsonify(sortByPrice(menuItems['menuItems']))
+    return menuItems#jsonify(sortByPrice(menuItems['menuItems']))
 @app.route('/api/menu/update', methods=['GET'])
 def updateMongoWithAllMenus():
     getAllMenuItems()
