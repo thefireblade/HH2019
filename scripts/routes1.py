@@ -180,6 +180,7 @@ def cleanList(menuItems):
 def removeAllNone(menuItems, field):
     for menuItem in menuItems:
         if type(menuItem["rounded_nutrition_info"][nutritionFields.get(field)]) is not float:
+            print(menuItem)
             menuItems.remove(menuItem)
 
 def sort(menuItems, field):
