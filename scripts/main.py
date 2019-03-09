@@ -1,7 +1,6 @@
 from routes0 import app as route0
 from routes1 import app as route1
 import pymongo
-from routes0 import reset
 from flask import request, jsonify, Blueprint
 
 import routes0 as methods0
