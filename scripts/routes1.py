@@ -145,7 +145,7 @@ def sortByLessThan(menuItems, field, amount):
 
 @app.route('/api', methods=['GET'])
 def reference():
-    return app.send_static_file('Resference.html')
+    return app.send_static_file('Reference.html')
 
 @app.route('/api/sort/all/calories', methods=['GET'])
 def getCalories(field="calories"):
