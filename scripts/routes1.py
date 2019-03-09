@@ -5,61 +5,6 @@ from flask import request, jsonify, Blueprint
 from routes0 import getTempMenu, updateMenu
 
 app = Blueprint('route1',__name__, template_folder='templates')
-
-# Create some test data for our catalog in the form of a list of dictionaries.
-books = [
-    {'id': 0,
-     'title': 'A Fire Upon the Deep',
-     'author': 'Vernor Vinge',
-     'first_sentence': 'The coldsleep itself was dreamless.',
-     'year_published': '1992'},
-    {'id': 1,
-     'title': 'The Ones Who Walk Away From Omelas',
-     'author': 'Ursula K. Le Guin',
-     'first_sentence': 'With a clamor of bells that set the swallows soaring, the Festival of Summer came to the city Omelas, bright-towered by the sea.',
-     'published': '1973'},
-    {'id': 2,
-     'title': 'Dhalgren',
-     'author': 'Samuel R. Delany',
-     'first_sentence': 'to wound the autumnal city.',
-     'published': '1975'}
-]
-
-
-@app.route('/', methods=['GET'])
-def home():
-    return '''<h1>Distant Reading Archive</h1>
-<p>A prototype API for distant reading of science fiction novels.</p>'''
-
-
-@app.route('/api/v1/resources/books/all', methods=['GET'])
-def api_all():
-    return jsonify(books)
-
-
-@app.route('/api/v1/resources/books', methods=['GET'])
-def api_id():
-    # Check if an ID was provided as part of the URL.
-    # If ID is provided, assign it to a variable.
-    # If no ID is provided, display an error in the browser.
-    if 'id' in request.args:
-        id = int(request.args['id'])
-    else:
-        return "Error: No id field provided. Please specify an id."
-
-    # Create an empty list for our results
-    results = []
-
-    # Loop through the data and match results that fit the requested ID.
-    # IDs are unique, but other fields might return many results
-    for book in books:
-        if book['id'] == id:
-            results.append(book)
-
-    # Use the jsonify function from Flask to convert our list of
-    # Python dictionaries to the JSON format.
-    return jsonify(results)
-
 # r = requests.get(url = "", )
 # data = r.json()
 
@@ -74,64 +19,6 @@ nutritionFields = {
     "name": "name",
     "price": "price"
 }
-menuItems = [
-        {
-            "name": "pizza",
-            "rounded_nutrition_info": {
-                "calories": 230.0,
-                "g_carbs": 41.0,
-                "g_fiber": 6.0,
-                "mg_vitamin_d": 0.0,
-                "mg_potassium": "null",
-                "mg_calcium": 42.3,
-                "iu_vitamin_a": "null",
-                "g_added_sugar": "null",
-                "mg_cholesterol": 0.0,
-                "mg_iron": 2.6,
-                "mg_sodium": 15.0,
-                "mg_vitamin_c": 0.0,
-                "g_trans_fat": "null",
-                "re_vitamin_a": "null",
-                "g_protein": 8.0,
-                "g_sugar": 1.0,
-                "g_saturated_fat": 0.5,
-                "g_fat": 4.0
-            },
-            "location_name": "eastdining",
-            "menu_type": "kosher",
-            "meal_type":
-                ["Breakfast", "Lunch", "Dinner"],
-            "price": 5.33
-        },
-        {
-            "name": "bread",
-            "rounded_nutrition_info": {
-                "calories": 100.0,
-                "g_carbs": 23.0,
-                "g_fiber": 77.0,
-                "mg_vitamin_d": 3.0,
-                "mg_potassium": "null",
-                "mg_calcium": 23.0,
-                "iu_vitamin_a": "null",
-                "g_added_sugar": "null",
-                "mg_cholesterol": 0.1,
-                "mg_iron": 5.0,
-                "mg_sodium": 11.0,
-                "mg_vitamin_c": 0.2,
-                "g_trans_fat": "null",
-                "re_vitamin_a": "null",
-                "g_protein": 16.0,
-                "g_sugar": 5.0,
-                "g_saturated_fat": 0.7,
-                "g_fat": 7.0
-            },
-            "location_name": "westdining",
-            "menu_type": "kosher",
-            "meal_type":
-                ["Breakfast", "Lunch", "Dinner"],
-            "price": 0.0
-        }
-]
 
 def cleanList(menuItems):
     for menuItem in menuItems:
@@ -375,7 +262,7 @@ def searchByName(name):
     menuItems = sort(menuItems, nutritionFields.get("name"))
     list = []
     for i in menuItems:
-        if name in i["name"]:
+        if name.lower() in i["name"].lower():
             list.append(i)
     return jsonify(updateMenu(list))
 
@@ -385,7 +272,7 @@ def searchByLocation(field):
     rawList = sort(menuItems, "location_name")
     updatedList = []
     for i in rawList:
-        if i["location_name"] == field:
+        if i["location_name"].lower() == field.lower():
             updatedList.append(i)
     #print(json.dumps(updatedList, indent=4, sort_keys=False))
     return jsonify(updateMenu(updatedList))
@@ -398,7 +285,7 @@ def searchByType(field):
     for i in rawList:
         if i["meal_type"] is None:
             continue
-        if field in i['meal_type']:
+        if field.lower() in i['meal_type'].lower():
             updatedList.append(i)
     #print(json.dumps(updatedList, indent=4, sort_keys=False))
     return jsonify(updateMenu(updatedList))
