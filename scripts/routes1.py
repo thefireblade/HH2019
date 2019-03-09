@@ -133,23 +133,23 @@ menuItems = [
 def cleanList(menuItems):
     for menuItem in menuItems:
         if menuItem["rounded_nutrition_info"]["calories"] == "null":
-            menuItem["rounded_nutrition_info"]["calories"] = 0
+            menuItem["rounded_nutrition_info"]["calories"] = 0.0
         if menuItem["rounded_nutrition_info"]["g_carbs"] == "null":
-            menuItem["rounded_nutrition_info"]["g_carbs"] = 0
+            menuItem["rounded_nutrition_info"]["g_carbs"] = 0.0
         if menuItem["rounded_nutrition_info"]["g_fiber"] == "null":
-            menuItem["rounded_nutrition_info"]["g_fiber"] = 0
+            menuItem["rounded_nutrition_info"]["g_fiber"] = 0.0
         if menuItem["rounded_nutrition_info"]["mg_vitamin_d"] == "null":
-            menuItem["rounded_nutrition_info"]["mg_vitamin_d"] = 0
+            menuItem["rounded_nutrition_info"]["mg_vitamin_d"] = 0.0
         if menuItem["rounded_nutrition_info"]["mg_potassium"] == "null":
-            menuItem["rounded_nutrition_info"]["mg_potassium"] = 0
+            menuItem["rounded_nutrition_info"]["mg_potassium"] = 0.0
         if menuItem["rounded_nutrition_info"]["mg_calcium"] == "null":
-            menuItem["rounded_nutrition_info"]["mg_calcium"] = 0
+            menuItem["rounded_nutrition_info"]["mg_calcium"] = 0.0
         if menuItem["rounded_nutrition_info"]["iu_vitamin_a"] == "null":
-            menuItem["rounded_nutrition_info"]["iu_vitamin_a"] = 0
+            menuItem["rounded_nutrition_info"]["iu_vitamin_a"] = 0.0
         if menuItem["rounded_nutrition_info"]["g_added_sugar"] == "null":
-            menuItem["rounded_nutrition_info"]["g_added_sugar"] = 0
+            menuItem["rounded_nutrition_info"]["g_added_sugar"] = 0.0
         if menuItem["rounded_nutrition_info"]["mg_cholesterol"] == "null":
-            menuItem["rounded_nutrition_info"]["mg_cholesterol"] = 0
+            menuItem["rounded_nutrition_info"]["mg_cholesterol"] = 0.0
         if menuItem["rounded_nutrition_info"]["mg_iron"] == "null":
             menuItem["rounded_nutrition_info"]["mg_iron"] = 0
         if menuItem["rounded_nutrition_info"]["mg_sodium"] == "null":
@@ -168,7 +168,6 @@ def cleanList(menuItems):
             menuItem["rounded_nutrition_info"]["g_saturated_fat"] = 0
         if menuItem["rounded_nutrition_info"]["g_fat"] == "null":
             menuItem["rounded_nutrition_info"]["g_fat"] = 0
-    print(json.dumps(menuItems, indent=4, sort_keys=False))
     return menuItems
 
 # Valid fields are: calories, carbs, protein, fat, saturated fat, sugar, name, price
@@ -248,37 +247,37 @@ def getPrice(menuItems, field="price"):
     list = sort(menuItems, field)
     return list
 
-@app.route('/api/sort/all/calories/<int:amount>', methods=['GET'])
+@app.route('/api/sort/lessthanequalto/calories/<int:amount>', methods=['GET'])
 def getCaloriesLessThanEqualTo(menuItems, amount, field="calories"):
     updated = sortByLessThan(menuItems, field, amount)
     return updated
 
-@app.route('/api/sort/all/carbs/<int:amount>', methods=['GET'])
+@app.route('/api/sort/lessthanequalto/carbs/<int:amount>', methods=['GET'])
 def getCarbsLessThanEqualTo(menuItems, amount, field="carbs"):
     updated = sortByLessThan(menuItems, field, amount)
     return updated
 
-@app.route('/api/sort/all/protein/<int:amount>', methods=['GET'])
+@app.route('/api/sort/lessthanequalto/protein/<int:amount>', methods=['GET'])
 def getProteinLessThanEqualTo(menuItems, amount, field="protein"):
     updated = sortByLessThan(menuItems, field, amount)
     return updated
 
-@app.route('/api/sort/all/saturatedfat/<int:amount>', methods=['GET'])
+@app.route('/api/sort/lessthanequalto/saturatedfat/<int:amount>', methods=['GET'])
 def getSaturatedFatLessThanEqualTo(menuItems, amount, field="saturated fat"):
     updated = sortByLessThan(menuItems, field, amount)
     return updated
 
-@app.route('/api/sort/all/fat/<int:amount>', methods=['GET'])
+@app.route('/api/sort/lessthanequalto/fat/<int:amount>', methods=['GET'])
 def getFatLessThanEqualTo(menuItems, amount, field="fat"):
     updated = sortByLessThan(menuItems, field, amount)
     return updated
 
-@app.route('/api/sort/all/sugar/<int:amount>', methods=['GET'])
+@app.route('/api/sort/lessthanequalto/sugar/<int:amount>', methods=['GET'])
 def getSugarLessThanEqualTo(menuItems, amount, field="sugar"):
     updated = sortByLessThan(menuItems, field, amount)
     return updated
 
-@app.route('/api/sort/all/price/<int:amount>', methods=['GET'])
+@app.route('/api/sort/lessthanequalto/price/<int:amount>', methods=['GET'])
 def getPriceLessThanEqualTo(menuItems, amount, field="price"):
     updated = sortByLessThan(menuItems, field, amount)
     return updated
@@ -292,37 +291,39 @@ def sortByGreaterThan(menuItems, field, amount):
     print(json.dumps(updatedList, indent=4, sort_keys=False))
     return updatedList
 
-@app.route('./api/sort/greaterthan/calories/<int:amount>', methods=['GET'])
+@app.route('/api/sort/greaterthan/calories/<int:amount>', methods=['GET'])
 def getCaloriesGreaterThan(menuItems, amount, fields="calories"):
     updatedList = sortByGreaterThan(menuItems, fields, amount)
     return updatedList
 
-@app.route('./api/sort/greaterthan/carbs/<int:amount>', methods=['GET'])
+@app.route('/api/sort/greaterthan/carbs/<int:amount>', methods=['GET'])
 def getCarbsGreaterThan(menuItems, amount, fields="carbs"):
     updatedList = sortByGreaterThan(menuItems, fields, amount)
     return updatedList
 
-@app.route('./api/sort/greaterthan/protein/<int:amount>', methods=['GET'])
+@app.route('/api/sort/greaterthan/protein/<int:amount>', methods=['GET'])
 def getProteinGreaterThan(menuItems, amount, fields="protein"):
     updatedList = sortByGreaterThan(menuItems, fields, amount)
     return updatedList
 
-@app.route('./api/sort/greaterthan/saturatedfat/<int:amount>', methods=['GET'])
+@app.route('/api/sort/greaterthan/saturatedfat/<int:amount>', methods=['GET'])
 def getSaturatedFatGreaterThan(menuItems, amount, fields="saturated fat"):
     updatedList = sortByGreaterThan(menuItems, fields, amount)
     return updatedList
 
-@app.route('./api/sort/greaterthan/fat/<int:amount>', methods=['GET'])
+@app.route('/api/sort/greaterthan/fat/<int:amount>', methods=['GET'])
 def getFatGreaterThan(menuItems, amount, fields="fat"):
     updatedList = sortByGreaterThan(menuItems, fields, amount)
     return updatedList
 
-@app.route('./api/sort/greaterthan/sugar/<int:amount>', methods=['GET'])
+@app.route('/api/sort/greaterthan/sugar/<int:amount>', methods=['GET'])
 def getSugarGreaterThan(menuItems, amount, fields="sugar"):
     updatedList = sortByGreaterThan(menuItems, fields, amount)
     return updatedList
 
-@app.route('./api/sort/greaterthan/price/<int:amount>', methods=['GET'])
+@app.route('/api/sort/greaterthan/price/<int:amount>', methods=['GET'])
 def getProteinGreaterThan(menuItems, amount, fields="price"):
     updatedList = sortByGreaterThan(menuItems, fields, amount)
     return updatedList
+
+getCaloriesGreaterThan(menuItems, 101)
