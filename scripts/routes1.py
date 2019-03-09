@@ -329,6 +329,7 @@ def getPriceGreaterThan(menuItems, amount, fields="price"):
     updatedList = sortByGreaterThan(menuItems, fields, amount)
     return updatedList
 
+@app.route('/api/search/name/', methods=['GET'])
 def searchByName(menuItems, name):
     menuItems = sort(menuItems, nutritionFields.get("name"))
     list = []
@@ -337,6 +338,7 @@ def searchByName(menuItems, name):
             list.append(i)
     return list
 
+@app.route('/api/search/location/', methods=['GET'])
 def searchByLocation(menuItems, field):
     rawList = sort(menuItems, "location_name")
     updatedList = []
