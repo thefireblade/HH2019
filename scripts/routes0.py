@@ -2,6 +2,7 @@ from flask import request, jsonify, Blueprint
 from datetime import datetime
 from operator import itemgetter
 import pymongo
+import random
 
 import requests
 
@@ -83,7 +84,7 @@ def updateMenu(menuItems):
     mydb = mongoClient['hh2019']
     myCol = mydb['temp']
     myCol.remove({})
-    document =  {}
+    document = {}
     document['year'] =  datetime.now().year
     document['month'] = datetime.now().month
     document['day'] = datetime.now().day
@@ -133,3 +134,59 @@ def copyAllOverTemp():
 def updateMongoWithAllMenus():
     getAllMenuItems()
     return jsonify({'Success':True})
+
+
+def getRandomBreakfastItems():
+    reset = "http://34.73.231.100:5000/api/menu/reset"
+    request.get(reset)
+    url = "http://34.73.231.100:5000/api/search/mealtype/Breakfast"
+    items = requests.get(url).json()
+    index =random.randint(0,len(items))
+    return items[index]
+
+def getRandomLunchItems():
+    reset = "http://34.73.231.100:5000/api/menu/reset"
+    request.get(reset)
+    url = "http://34.73.231.100:5000/api/search/mealtype/Lunch"
+    items = requests.get(url).json()
+    index =random.randint(0,len(items))
+    return items[index]
+
+def getRandomDinnerItems():
+    reset = "http://34.73.231.100:5000/api/menu/reset"
+    request.get(reset)
+    url = "http://34.73.231.100:5000/api/search/mealtype/Dinner"
+    items = requests.get(url).json()
+    index =random.randint(0,len(items))
+    return items[index]
+
+@app.route('/api/menu/generateRandom/<string:field>', methods=['GET'])
+def generateRandomList(field)
+    menuItems = getLatestMenu()
+    generatedList = []
+    reset = "http://34.73.231.100:5000/api/menu/reset"
+    requests.get(reset)
+
+    location_url = "http://34.73.231.100:5000/api/search/location/" + field
+    requests.get(location_url)
+    greater_than_api = "/api/sort/greaterthan/price/1"
+    requests.get(greater_than_api)
+    breakfastItem = getRandomBreakfastItem()
+
+    requests.get(reset)
+    requests.get(location_url)
+    requests.get(greater_than_api)
+    lunchItem = getRandomLunchItem()
+
+    requests.get(reset)
+    requests.get(location_url)
+    requests.get(greater_than_api)
+    dinnerItem = getRandomDinnerItem()
+
+    requests.get(reset)
+
+    generatedList.append(breakfastItem)
+    generatedList.append(lunchItem)
+    generatedList.append(dinnerItem)
+
+    return jsonify(generatedList)
