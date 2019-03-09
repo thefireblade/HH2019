@@ -396,11 +396,9 @@ def searchByType(field):
     rawList = sort(menuItems, "meal_type")
     updatedList = []
     for i in rawList:
-        print(i)
         if i["meal_type"] is None:
             continue
-        for j in i:
-            if field in j:
-                updatedList.append(i)
+        if field in i['meal_type']:
+            updatedList.append(i)
     #print(json.dumps(updatedList, indent=4, sort_keys=False))
     return jsonify(updateMenu(updatedList))
