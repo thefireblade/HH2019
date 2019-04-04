@@ -4,9 +4,7 @@ This is the HackHealth2019 repo of Jason, Ajay, and Sam.
 
 &copy;2019 All rights reserved.
 
-[Link to our discord](https://discordapp.com/channels/551848028936339476/551848028936339478)
-W3.CSS Template        body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif} .w3-bar,h1,button {font-family: "Montserrat", sans-serif} .fa-anchor,.fa-coffee {font-size:200px} html { scroll-behavior: smooth; }  
-
+[Link to our discord](https://discordapp.com/channels/551848028936339476/551848028936339478) 
 [](javascript:void(0); "Toggle Navigation Menu")[Home](#) [/menu](#menu) [/sort](#sort) [/search](#search)
 
 [/menu](#menu) [/sort](#sort) [/search](#search)
