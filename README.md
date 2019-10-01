@@ -1,6 +1,6 @@
 ![This is the hackhealth image](http://hackhealth.umd.edu/wp-content/uploads/2014/07/hh-horizontal.fw_.png)
 
-This is the HackHealth2019 repo of Jason, Ajay, and Sam.
+This is the HackHealth2019 repo of Jason, Ajay, Gaurav and Sam.
 
 &copy;2019 All rights reserved.
 
